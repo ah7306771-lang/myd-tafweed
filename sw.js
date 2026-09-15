@@ -26,6 +26,7 @@ self.addEventListener('activate', (event) => {
 // Network-first, falling back to cache (so updates show up, but it still works offline)
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  if (new URL(event.request.url).origin !== self.location.origin) return; // لا تتدخل في طلبات خارجية زي بث الراديو
   event.respondWith(
     fetch(event.request)
       .then((res) => {
