@@ -2034,9 +2034,9 @@ window.safeFileName = function(str){
   }
 
   function fileName(){
-    const num = safeFileName($('docNum').value) || 'New';
-    const factory = safeFileName($('factory').value);
-    return `Tafweed-Masria-${num}${factory ? '-'+factory : ''}.pdf`;
+    const clean = s => String(s||'').trim().replace(/[\\\/:*?"<>|]/g,'').replace(/\s+/g,'_');
+    const factory = clean($('factory').value);
+    return 'تفويض' + (factory ? '_'+factory : '') + '.pdf';
   }
 
   function requireDocNum(){
